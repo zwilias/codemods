@@ -4,32 +4,32 @@ module.exports = function(fileInfo, api) {
         shiftSource = shift(fileInfo.source);
 
     var nodeToInsert = shift.ifStatement(
-        shift.logicalExpression(
-            "&&",
-            shift.binaryExpression(
-                "instanceof",
-                shift.identifier("x"),
-                shift.identifier("String")
-            ),
-            shift.binaryExpression(
-                "===",
-                shift.callExpression(
-                    shift.memberExpression(
-                        shift.identifier("x"),
-                        shift.identifier("valueOf")
+        shift.binaryExpression(
+            "instanceof",
+            shift.identifier("x"),
+            shift.identifier("String")
+        ),
+        shift.blockStatement([
+            shift.returnStatement(
+                shift.binaryExpression(
+                    "===",
+                    shift.callExpression(
+                        shift.memberExpression(
+                            shift.identifier("x"),
+                            shift.identifier("valueOf")
+                        ),
+                        []
                     ),
-                    []
-                ),
-                shift.callExpression(
-                    shift.memberExpression(
-                        shift.identifier("y"),
-                        shift.identifier("valueOf")
-                    ),
-                    []
+                    shift.callExpression(
+                        shift.memberExpression(
+                            shift.identifier("y"),
+                            shift.identifier("valueOf")
+                        ),
+                        []
+                    )
                 )
             )
-        ),
-        shift.blockStatement([shift.returnStatement(shift.literal(true))])
+        ])
     );
 
     return shiftSource
