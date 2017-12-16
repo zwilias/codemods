@@ -22,7 +22,8 @@ module.exports = function(fileInfo, api) {
             return (
                 path.value.init &&
                 path.value.init.type === "CallExpression" &&
-                functionMakers.indexOf(path.value.init.callee.name) !== -1
+                functionMakers.indexOf(path.value.init.callee.name) !== -1 &&
+                path.value.id.name !== "update"
             );
         })
         .forEach(function(path) {
